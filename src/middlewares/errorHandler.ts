@@ -13,13 +13,12 @@ export default function errorHandler(
   _next: NextFunction
 ): void {
   const status = res.statusCode === 200 ? 500 : res.statusCode;
-  // eslint-disable-next-line no-console
   console.error(
     err,
     err.details
       ? err.details.map((detail) => detail.message)
       : "Undefined Error"
-  ); // Show error for JOI
+  );
   res.status(status).send({
     status: status,
     message: err.message,
