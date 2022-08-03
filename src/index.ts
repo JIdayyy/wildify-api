@@ -1,7 +1,7 @@
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import app from "./server";
 
-// dotenv.config();
+dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 
