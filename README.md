@@ -1,10 +1,10 @@
 🚧 WORK IN PROGRESS
 
-Thx to BazEso ! (Github: https://github.com/Karnak19 )
+# Thx to BazEso ! ( Github: https://github.com/Karnak19 🧪 )
 
-#This is a simple API to manage songs.
+- This is a simple API to manage songs.
 
-#Objects are sent to MINIO.
+- Objects are sent to MINIO.
 
 I'll write the documentation later. But for now, you can use the following endpoints:
 
