@@ -34,6 +34,8 @@ const post: SongHandlers["post"] = async (req, res, next) => {
       duration: true,
     });
 
+    console.log(title, album);
+
     if (!album || !albumartist || !title) {
       const errorMessage = {
         ...(!album && {
