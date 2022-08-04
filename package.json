@@ -13,7 +13,8 @@
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
     "prisma:generate": "prisma generate",
-    "swagger-autogen": "node ./src/swagger.js"
+    "swagger-autogen": "node ./src/swagger.js",
+    "deploy": "npm run build && node ./dist/src/index.js"
   },
   "keywords": [],
   "author": "",
