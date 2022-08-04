@@ -9,8 +9,8 @@ import passport from "passport";
 const GithubStrategy = require("passport-github").Strategy;
 
 const credentials = {
-  clientID: "a701d4aa92ced141ac4e",
-  clientSecret: "36357c9fc225ae3fb98782f790ddf960c46ae873",
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_SECRET,
   callbackURL: `http://localhost:4000/api/v1/auth/github/cb`,
 };
 
