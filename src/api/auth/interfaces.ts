@@ -13,6 +13,9 @@ interface IRegisterBody {
 
 interface ILoginResponse {
   token: string;
+  user: {
+    username: string;
+  };
 }
 
 export default interface AuthHandlers {

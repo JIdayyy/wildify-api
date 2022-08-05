@@ -22,8 +22,11 @@ const register: AuthHandlers["register"] = async (req, res, next) => {
       },
     });
 
+    const token = sign({ username: user.pseudo }, process.env.SECRET as string);
+
     res.status(200).json({
-      token: sign({ username: user.pseudo }, process.env.SECRET as string),
+      user: { username: user.pseudo },
+      token,
     });
   } catch (error) {
     next(error);

@@ -14,8 +14,6 @@ const post: SongHandlers["post"] = async (req, res, next) => {
   try {
     const { files } = await asyncFormParse(req);
 
-    console.log(files);
-
     if (!files) {
       throw new Error("No files provided");
     }
@@ -33,8 +31,6 @@ const post: SongHandlers["post"] = async (req, res, next) => {
     } = await mm.parseFile(path, {
       duration: true,
     });
-
-    console.log(title, album);
 
     if (!album || !albumartist || !title) {
       const errorMessage = {
@@ -75,12 +71,7 @@ const post: SongHandlers["post"] = async (req, res, next) => {
       "Content-type": type?.mime,
     };
 
-    const data = await minioClient.putObject(
-      "wildify",
-      fileName,
-      buffer,
-      metadata
-    );
+    await minioClient.putObject("wildify", fileName, buffer, metadata);
 
     console.log(`Upload to minio done ! ${fileName}`);
 

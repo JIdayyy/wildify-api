@@ -3,6 +3,7 @@ import getOne from "./handlers/getOne";
 import put from "./handlers/put";
 import deleteOne from "./handlers/delete";
 import post from "./handlers/post";
+import pictureUpload from "./handlers/upload";
 
 const controller = {
   getAll,
@@ -10,6 +11,7 @@ const controller = {
   put,
   delete: deleteOne,
   post,
+  pictureUpload,
 };
 
 export default controller;

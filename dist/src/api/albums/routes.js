@@ -11,4 +11,5 @@ router.get("/:id", controller_1.default.getOne);
 router.put("/:id", controller_1.default.put);
 router.delete("/:id", controller_1.default.delete);
 router.post("/", controller_1.default.post);
+router.post("/:id/picture", controller_1.default.pictureUpload);
 exports.default = router;

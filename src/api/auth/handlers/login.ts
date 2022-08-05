@@ -20,6 +20,7 @@ const login: AuthHandlers["login"] = async (req, res, next) => {
     const token = sign({ username: user.pseudo }, process.env.SECRET as string);
 
     res.status(200).json({
+      user: { username: user.pseudo },
       token,
     });
   } catch (error) {

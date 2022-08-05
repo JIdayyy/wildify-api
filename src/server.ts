@@ -17,6 +17,7 @@ app.use(
 
 app.use(passport.initialize());
 
+app.use(bodyParser.raw());
 app.use(bodyParser.json());
 
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));

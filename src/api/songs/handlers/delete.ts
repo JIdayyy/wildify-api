@@ -16,16 +16,8 @@ const deleteOne: SongHandlers["delete"] = async (req, res, next) => {
       },
     });
 
-    console.log(`${file.artist?.name}/${file.album?.title}/${file.title}`);
-
-    const deleted = await minioClient.removeObject(
+    await minioClient.removeObject(
       "wildify",
-      `${slugify(file.artist?.name as string)}/${slugify(
-        file.album?.title as string
-      )}/${slugify(file.title as string)}`
-    );
-
-    console.log(
       `${slugify(file.artist?.name as string)}/${slugify(
         file.album?.title as string
       )}/${slugify(file.title as string)}`

@@ -35,7 +35,6 @@ const minioClient_1 = __importDefault(require("../../../services/minioClient"));
 const post = async (req, res, next) => {
     try {
         const { files } = await (0, songUtils_1.asyncFormParse)(req);
-        console.log(files);
         if (!files) {
             throw new Error("No files provided");
         }
@@ -47,7 +46,6 @@ const post = async (req, res, next) => {
         const { common: { album, albumartist, title }, format: { duration }, } = await mm.parseFile(path, {
             duration: true,
         });
-        console.log(title, album);
         if (!album || !albumartist || !title) {
             const errorMessage = {
                 ...(!album && {
@@ -76,7 +74,7 @@ const post = async (req, res, next) => {
         const metadata = {
             "Content-type": type === null || type === void 0 ? void 0 : type.mime,
         };
-        const data = await minioClient_1.default.putObject("wildify", fileName, buffer, metadata);
+        await minioClient_1.default.putObject("wildify", fileName, buffer, metadata);
         console.log(`Upload to minio done ! ${fileName}`);
         const newSong = await client_1.default.song.create({
             data: {
