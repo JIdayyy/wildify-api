@@ -27,9 +27,12 @@
     "@types/minio": "^7.0.13",
     "@types/multiparty": "^0.0.33",
     "@types/passport": "^1.0.9",
+    "audio-decode": "^1.4.0",
+    "audioform": "^0.3.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "decode-audio-data": "^0.1.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-jsdoc-swagger": "^1.8.0",
@@ -44,7 +47,8 @@
     "prisma": "^4.1.1",
     "swagger-autogen": "^2.21.5",
     "swagger-jsdoc": "^6.2.3",
-    "swagger-ui-express": "^4.5.0"
+    "swagger-ui-express": "^4.5.0",
+    "web-audio-api": "^0.2.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
