@@ -10,7 +10,7 @@ datasource db {
 model Song {
   id         String     @id @default(uuid())
   title      String     @unique
-  link    String
+  link       String
   duration   String     @default("0:00")
   artist     Artist?    @relation(fields: [artistId], references: [id])
   artistId   String?
@@ -46,11 +46,15 @@ model Playlist {
   description String
   picture     String
   songs       Song[]
+  user        User  @relation(fields: [userId], references: [id])
+  userId      String
 }
 
 model User {
   id       String   @id @default(uuid())
-  pseudo   String   @unique
-  password String?
+  username String   @unique
+  email    String   @unique
+  password String
   songs    Song[]
+  playlists Playlist[]
 }

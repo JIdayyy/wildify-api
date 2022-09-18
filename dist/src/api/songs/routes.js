@@ -8,6 +8,7 @@ const controller_1 = __importDefault(require("./controller"));
 const router = (0, express_1.Router)();
 router.get("/", controller_1.default.getAll);
 router.get("/:id", controller_1.default.getOne);
+router.get("/:id/soundwave", controller_1.default.getSoundWaveData);
 router.put("/:id", controller_1.default.put);
 router.delete("/:id", controller_1.default.delete);
 router.post("/", controller_1.default.post);

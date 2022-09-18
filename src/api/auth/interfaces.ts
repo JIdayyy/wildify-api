@@ -1,21 +1,20 @@
 import { RequestHandler } from "express";
+import { UserWithoutPassword } from "../../interfaces/user";
 
-interface ILoginBody {
+export interface ILoginBody {
   username: string;
   password: string;
+  email: string;
 }
 
-interface IRegisterBody {
+export interface IRegisterBody {
   username: string;
   password: string;
-  secretKey: string;
+  email: string;
 }
 
-interface ILoginResponse {
-  token: string;
-  user: {
-    username: string;
-  };
+export interface ILoginResponse {
+  user: UserWithoutPassword;
 }
 
 export default interface AuthHandlers {
