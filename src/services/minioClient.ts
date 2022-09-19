@@ -1,4 +1,6 @@
 import * as Minio from "minio";
+import dotenv from "dotenv";
+dotenv.config();
 
 const { MINIO_USERNAME, MINIO_PASSWORD, MINIO_ENDPOINT } = process.env;
 

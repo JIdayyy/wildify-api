@@ -10,21 +10,25 @@ const githubCb = async (req: any, res: any) => {
 
   user = await prisma.user.findUnique({
     where: {
-      pseudo: req.user.username,
+      username: req.user.username,
     },
   });
 
   if (!user) {
     user = await prisma.user.create({
       data: {
-        pseudo: req.user.username,
+        username: req.user.username,
+        email: req.user.email,
+        password: "github",
       },
     });
   }
 
+  const { password: _, ...userWithoutPassword } = user;
+
   const token = jwt.sign(
     {
-      username: user.pseudo,
+      user: userWithoutPassword,
     },
     process.env.SECRET as Secret,
     {
@@ -33,7 +37,7 @@ const githubCb = async (req: any, res: any) => {
   );
 
   res.redirect(
-    `${req.query.state}?token=${token}&id=${user.id}&pseudo=${user.pseudo}`
+    `${req.query.state}?token=${token}&id=${user.id}&pseudo=${user.username}`
   );
 };
 

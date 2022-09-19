@@ -5,18 +5,11 @@
     "title": "Wildify REST Api",
     "description": "This is a simple REST API for Wildify. It is used to create, update, and delete Wildify songs"
   },
-  "host": "localhost:4000",
+  "host": "wildify-api.digitalcopilote.re",
   "basePath": "/api/v1",
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/": {
       "get": {

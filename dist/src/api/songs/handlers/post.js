@@ -32,6 +32,7 @@ const fs_1 = __importDefault(require("fs"));
 const file_type_1 = __importDefault(require("file-type"));
 const songUtils_1 = require("../../../utils/songUtils");
 const minioClient_1 = __importDefault(require("../../../services/minioClient"));
+const createSoundWaveData_1 = __importDefault(require("../../../utils/createSoundWaveData"));
 const post = async (req, res, next) => {
     try {
         const { files } = await (0, songUtils_1.asyncFormParse)(req);
@@ -76,6 +77,11 @@ const post = async (req, res, next) => {
         };
         await minioClient_1.default.putObject("wildify", fileName, buffer, metadata);
         console.log(`Upload to minio done ! ${fileName}`);
+        const soundWaveData = await (0, createSoundWaveData_1.default)(buffer);
+        if (!soundWaveData) {
+            throw new Error("Error during waveform data creation");
+        }
+        console.log("SoundWave Created", soundWaveData);
         const newSong = await client_1.default.song.create({
             data: {
                 title,
@@ -104,6 +110,11 @@ const post = async (req, res, next) => {
                         where: {
                             name: albumartist,
                         },
+                    },
+                },
+                soundWave: {
+                    create: {
+                        data: JSON.stringify(soundWaveData),
                     },
                 },
             },

@@ -4,29 +4,32 @@ import prisma from "../../../../prisma/client";
 import { sign } from "jsonwebtoken";
 
 const register: AuthHandlers["register"] = async (req, res, next) => {
-  const { username, password, secretKey } = req.body;
+  const { username, password, email } = req.body;
 
   try {
-    if (!username || !password || !secretKey) {
-      throw new Error("Missing username, password or secretKey");
-    }
-
-    if (secretKey !== process.env.SECRET_KEY) {
-      throw new Error("Invalid secretKey");
+    if (!username || !password) {
+      throw new Error("Missing credentials");
     }
 
     const user = await prisma.user.create({
       data: {
-        pseudo: username,
+        username,
+        email,
         password: bcrypt.hashSync(password, 10),
       },
     });
 
-    const token = sign({ username: user.pseudo }, process.env.SECRET as string);
+    const token = sign(
+      { id: user.id, email: user.email, username: user.username },
+      process.env.SECRET as string
+    );
 
-    res.status(200).json({
-      user: { username: user.pseudo },
-      token,
+    const { password: _, ...userWithoutPassword } = user;
+
+    res.setHeader("Authorization", `Bearer ${token}`);
+
+    return res.status(201).json({
+      user: userWithoutPassword,
     });
   } catch (error) {
     next(error);

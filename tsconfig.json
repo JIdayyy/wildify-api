@@ -6,7 +6,8 @@
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true
   },
   "exclude": ["dist", "prisma", "tests"]
 }
