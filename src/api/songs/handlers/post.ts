@@ -9,6 +9,7 @@ import {
   mp3DurationString,
 } from "../../../utils/songUtils";
 import minioClient from "../../../services/minioClient";
+import createSoundWaveData from "../../../utils/createSoundWaveData";
 
 const post: SongHandlers["post"] = async (req, res, next) => {
   try {
@@ -75,6 +76,14 @@ const post: SongHandlers["post"] = async (req, res, next) => {
 
     console.log(`Upload to minio done ! ${fileName}`);
 
+    const soundWaveData = await createSoundWaveData(buffer);
+
+    if (!soundWaveData) {
+      throw new Error("Error during waveform data creation");
+    }
+
+    console.log("SoundWave Created", soundWaveData);
+
     const newSong = await prisma.song.create({
       data: {
         title,
@@ -103,6 +112,11 @@ const post: SongHandlers["post"] = async (req, res, next) => {
             where: {
               name: albumartist,
             },
+          },
+        },
+        soundWave: {
+          create: {
+            data: JSON.stringify(soundWaveData),
           },
         },
       },

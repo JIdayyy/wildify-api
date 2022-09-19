@@ -4,12 +4,12 @@ import prisma from "../../../../prisma/client";
 import bcrypt from "bcryptjs";
 
 const login: AuthHandlers["login"] = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
-        username,
+        email,
       },
     });
 
@@ -30,6 +30,7 @@ const login: AuthHandlers["login"] = async (req, res, next) => {
       user: userWithoutPassword,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

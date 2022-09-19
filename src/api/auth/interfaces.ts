@@ -2,15 +2,14 @@ import { RequestHandler } from "express";
 import { UserWithoutPassword } from "../../interfaces/user";
 
 export interface ILoginBody {
-  username: string;
   password: string;
   email: string;
 }
 
 export interface IRegisterBody {
-  username: string;
   password: string;
   email: string;
+  username: string;
 }
 
 export interface ILoginResponse {
