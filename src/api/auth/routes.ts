@@ -13,7 +13,8 @@ router.get(
   }),
   controller.githubCb
 );
-router.post("/login", controller.login);
-router.post("/register", controller.register);
+router.post("/signin", controller.login);
+router.post("/me", controller.me);
+router.post("/signup", controller.register);
 
 export default router;

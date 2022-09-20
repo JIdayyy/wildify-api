@@ -7,4 +7,5 @@ export default interface SongHandlers {
   put: RequestHandler<{ id: string }, Song, Partial<Song>>;
   delete: RequestHandler<{ id: string }, string, null>;
   post: RequestHandler<Record<string, never>, Song, null>;
+  getSoundWaveData: RequestHandler<Record<string, never>, number[], null>;
 }

@@ -10,7 +10,7 @@ datasource db {
 model Song {
   id         String     @id @default(uuid())
   title      String     @unique
-  link    String
+  link       String
   duration   String     @default("0:00")
   artist     Artist?    @relation(fields: [artistId], references: [id])
   artistId   String?
@@ -20,7 +20,17 @@ model Song {
   user       User?      @relation(fields: [userId], references: [id])
   userId     String?
   created_at DateTime   @default(now())
-  updated_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  soundWave SoundWave? 
+}
+
+model SoundWave {
+  id String @id@default(uuid())
+  song Song @relation(fields: [songId], references: [id])
+  songId String @unique()
+  data String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Artist {
@@ -29,6 +39,8 @@ model Artist {
   picture String?
   songs   Song[]
   albums  Album[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 }
 
 model Album {
@@ -38,6 +50,8 @@ model Album {
   artist   Artist? @relation(fields: [artistId], references: [id])
   artistId String?
   songs    Song[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 }
 
 model Playlist {
@@ -46,11 +60,19 @@ model Playlist {
   description String
   picture     String
   songs       Song[]
+  user        User  @relation(fields: [userId], references: [id])
+  userId      String
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 }
 
 model User {
   id       String   @id @default(uuid())
-  pseudo   String   @unique
-  password String?
+  username String   @unique
+  email    String   @unique
+  password String
   songs    Song[]
+  playlists Playlist[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 }

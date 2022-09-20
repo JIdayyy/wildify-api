@@ -1,28 +1,23 @@
 import { RequestHandler } from "express";
+import { UserWithoutPassword } from "../../interfaces/user";
 
-interface ILoginBody {
-  username: string;
+export interface ILoginBody {
   password: string;
+  email: string;
 }
 
-interface IRegisterBody {
-  username: string;
+export interface IRegisterBody {
   password: string;
-  secretKey: string;
-}
-
-interface ILoginResponse {
-  token: string;
-  user: {
-    username: string;
-  };
+  email: string;
+  username: string;
 }
 
 export default interface AuthHandlers {
-  login: RequestHandler<Record<string, never>, ILoginResponse, ILoginBody>;
+  login: RequestHandler<Record<string, never>, UserWithoutPassword, ILoginBody>;
   register: RequestHandler<
     Record<string, never>,
     ILoginResponse,
     IRegisterBody
   >;
+  me: RequestHandler<Record<string, never>, UserWithoutPassword, undefined>;
 }
