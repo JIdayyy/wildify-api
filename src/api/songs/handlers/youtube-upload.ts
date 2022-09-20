@@ -13,12 +13,13 @@ const youtube = async (req: any, res: any) => {
   console.log(url);
 
   await youtubeDllAndConvert(url, async (video: any, audio: any) => {
-    console.log("start");
+    // console.log("start");
+    // console.log("AUDIO", audio);
 
     try {
-      const process = new ffmpeg(video, (err, video) => {
-        return video.fnExtractSoundToMP3(audio, function (error, file) {
-          console.log(error);
+      const process = new ffmpeg(video, (err, vid) => {
+        return vid.fnExtractSoundToMP3(audio, function (error, file) {
+          console.log("ERROR", error);
           if (!error) console.log("Audio file: " + file);
           res.setHeader(
             "Content-disposition",
@@ -33,10 +34,10 @@ const youtube = async (req: any, res: any) => {
           return res.status(200).json(res.body);
         });
       });
-      console.log("ici", process);
+      // console.log("ici", process);
     } catch (e: any) {
-      console.log(e.code);
-      console.log(e.msg);
+      console.log("error", e.code);
+      console.log("error", e.msg);
     }
   });
 };

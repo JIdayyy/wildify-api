@@ -32,7 +32,7 @@ async function main(url: any, callback: any) {
   // and finally we can download the video
   await fromInfo("videoInfo.json", { output: `videos/4.mp4` });
   const title = info.title.replace(/[^\w\s]/gi, "").replace(/ /g, "-");
-  // await audioConvert(`videos/4.mp4.webm`, `audio/${title}.mp3`);
+  await audioConvert(`videos/4.mp4`, `audio/${title}.mp3`);
 
   return await callback(`videos/4.mp4.webm`, `audio/${title}.mp3`);
 }
