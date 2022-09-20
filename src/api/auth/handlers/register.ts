@@ -19,17 +19,17 @@ const register: AuthHandlers["register"] = async (req, res, next) => {
       },
     });
 
+    const { password: _, ...userWithoutPassword } = user;
+
     const token = sign(
-      { id: user.id, email: user.email, username: user.username },
+      { ...userWithoutPassword },
       process.env.SECRET as string
     );
-
-    const { password: _, ...userWithoutPassword } = user;
 
     res.setHeader("Authorization", `Bearer ${token}`);
 
     return res.status(201).json({
-      user: userWithoutPassword,
+      ...userWithoutPassword,
     });
   } catch (error) {
     next(error);

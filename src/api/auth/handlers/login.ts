@@ -20,14 +20,14 @@ const login: AuthHandlers["login"] = async (req, res, next) => {
     const { password: _, ...userWithoutPassword } = user;
 
     const token = sign(
-      { user: userWithoutPassword },
+      { ...userWithoutPassword },
       process.env.SECRET as string
     );
 
     res.setHeader("Authorization", `Bearer ${token}`);
 
     return res.status(200).json({
-      user: userWithoutPassword,
+      ...userWithoutPassword,
     });
   } catch (error) {
     console.log(error);

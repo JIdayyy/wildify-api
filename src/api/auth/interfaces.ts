@@ -12,15 +12,12 @@ export interface IRegisterBody {
   username: string;
 }
 
-export interface ILoginResponse {
-  user: UserWithoutPassword;
-}
-
 export default interface AuthHandlers {
-  login: RequestHandler<Record<string, never>, ILoginResponse, ILoginBody>;
+  login: RequestHandler<Record<string, never>, UserWithoutPassword, ILoginBody>;
   register: RequestHandler<
     Record<string, never>,
     ILoginResponse,
     IRegisterBody
   >;
+  me: RequestHandler<Record<string, never>, UserWithoutPassword, undefined>;
 }
