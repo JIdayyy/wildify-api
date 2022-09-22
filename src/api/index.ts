@@ -3,7 +3,7 @@ import songs from "../api/songs/routes";
 import albums from "../api/albums/routes";
 import artists from "../api/artists/routes";
 import auth from "./auth/routes";
-import { checkToken } from "../utils/checkToken";
+import { checkToken } from "../middlewares/checkToken";
 
 const router = Router();
 
