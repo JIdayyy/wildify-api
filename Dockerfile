@@ -1,5 +1,5 @@
 # pull the Node.js Docker image
-FROM node:9-slim
+FROM node:16-slim
 
 # create the directory inside the container
 
