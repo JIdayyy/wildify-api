@@ -1,3 +1,4 @@
+import corsOptions from "./config/corsOptions";
 import Express from "express";
 import errorHandler from "./middlewares/errorHandler";
 import passport from "passport";
@@ -9,11 +10,7 @@ import swaggerFile from "../swagger_output.json";
 
 const app = Express();
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors(corsOptions));
 
 app.use(passport.initialize());
 

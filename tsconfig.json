@@ -9,5 +9,10 @@
     "resolveJsonModule": true,
     "declaration": true
   },
-  "exclude": ["dist", "prisma", "tests"]
+  "exclude": [
+    "dist",
+    "prisma",
+    "tests",
+    "./dist/**/*" // This is what fixed it!
+  ]
 }

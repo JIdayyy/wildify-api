@@ -23,7 +23,7 @@ const deleteOne: SongHandlers["delete"] = async (req, res, next) => {
       )}/${slugify(file.title as string)}`
     );
 
-    res.status(200).json(`Song with id: ${id} deleted successfully`);
+    res.status(200).json({ message: "Song deleted", id: file.id });
   } catch (error) {
     next(error);
   }
