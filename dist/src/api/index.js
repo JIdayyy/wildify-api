@@ -8,12 +8,13 @@ const routes_1 = __importDefault(require("../api/songs/routes"));
 const routes_2 = __importDefault(require("../api/albums/routes"));
 const routes_3 = __importDefault(require("../api/artists/routes"));
 const routes_4 = __importDefault(require("./auth/routes"));
+const checkToken_1 = require("../utils/checkToken");
 const router = (0, express_1.Router)();
 router.get("/", (req, res) => {
     return res.status(200).send("API - 👋🌎🌍🌏");
 });
 router.use("/auth", routes_4.default);
-// router.use(checkToken);
+router.use(checkToken_1.checkToken);
 router.use("/songs", routes_1.default);
 router.use("/albums", routes_2.default);
 router.use("/artists", routes_3.default);

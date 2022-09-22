@@ -20,7 +20,7 @@ const deleteOne = async (req, res, next) => {
             },
         });
         await minioClient_1.default.removeObject("wildify", `${(0, songUtils_1.slugify)((_a = file.artist) === null || _a === void 0 ? void 0 : _a.name)}/${(0, songUtils_1.slugify)((_b = file.album) === null || _b === void 0 ? void 0 : _b.title)}/${(0, songUtils_1.slugify)(file.title)}`);
-        res.status(200).json(`Song with id: ${id} deleted successfully`);
+        res.status(200).json({ message: "Song deleted", id: file.id });
     }
     catch (error) {
         next(error);

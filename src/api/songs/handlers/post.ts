@@ -10,6 +10,7 @@ import {
 } from "../../../utils/songUtils";
 import minioClient from "../../../services/minioClient";
 import createSoundWaveData from "../../../utils/createSoundWaveData";
+import { io } from "../../..";
 
 const post: SongHandlers["post"] = async (req, res, next) => {
   try {
@@ -82,7 +83,7 @@ const post: SongHandlers["post"] = async (req, res, next) => {
       throw new Error("Error during waveform data creation");
     }
 
-    console.log("SoundWave Created", soundWaveData);
+    console.log("SoundWave Created");
 
     const newSong = await prisma.song.create({
       data: {
@@ -120,7 +121,13 @@ const post: SongHandlers["post"] = async (req, res, next) => {
           },
         },
       },
+      include: {
+        album: true,
+        artist: true,
+      },
     });
+
+    io.emit("NEW_SONG", newSong);
 
     return res.status(201).json(newSong);
   } catch (error) {
