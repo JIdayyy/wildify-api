@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+
+dotenv.config();
 const whiteListedUrls = process.env.CORS_WHITELISTED_URLS?.split(",") || [];
 
 export const corsOptions = {
@@ -5,6 +8,12 @@ export const corsOptions = {
     origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => Error | void
   ): void | Error => {
+    console.log(origin);
+
+    if (process.env.NODE_ENV === "development") {
+      return callback(null, true);
+    }
+
     if (typeof origin === "undefined") {
       return callback(new Error("Not allowed by CORS"), false);
     }

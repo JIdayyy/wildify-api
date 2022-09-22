@@ -13,7 +13,7 @@ const controller = {
   put,
   delete: deleteOne,
   post,
-  youtube,
+  // youtube,
   download,
   getSoundWaveData,
 };

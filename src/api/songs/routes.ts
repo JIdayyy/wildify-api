@@ -10,6 +10,6 @@ router.get("/:id/soundwave", controller.getSoundWaveData);
 router.put("/:id", controller.put);
 router.delete("/:id", controller.delete);
 router.post("/", controller.post);
-router.post("/youtube", controller.youtube);
+// router.post("/youtube", controller.youtube);
 
 export default router;
