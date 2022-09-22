@@ -7,3 +7,4 @@ dist
 *.ogg
 *.wav
 *.webm
+package-lock.json
