@@ -1,0 +1,23 @@
+version: "3.1"
+
+services:
+  ytask-api:
+    build:
+      context: ./
+
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_SECRET: ${GITHUB_SECRET}
+      PORT: ${PORT}
+      CORS_WHITELISTED_URLS: ${CORS_WHITELISTED_URLS}
+      SECRET: ${SECRET}
+      MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+      MINIO_USERNAME: ${MINIO_USERNAME}
+      MINIO_PASSWORD: ${MINIO_PASSWORD}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/:/app/src/
+    command: npm run deploy
