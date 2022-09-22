@@ -9,6 +9,7 @@ WORKDIR /usr/src/
 COPY package*.json .
 
 # run npm install in our local machine
+RUN apt-get update || : && apt-get install python -y
 RUN npm install
 
 
