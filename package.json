@@ -35,8 +35,6 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-jsdoc-swagger": "^1.8.0",
-    "ffmpeg": "^0.0.4",
-    "ffmpeg-static": "^5.1.0",
     "file-type": "^16.4.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -44,18 +42,15 @@
     "multiparty": "^4.2.3",
     "music-metadata": "^7.12.5",
     "passport": "^0.6.0",
-    "@ffmpeg-installer/ffmpeg": "^1.0.13",
     "passport-github": "^1.1.0",
     "prisma": "^4.1.1",
     "socket.io": "^4.5.2",
     "swagger-autogen": "^2.21.5",
     "swagger-jsdoc": "^6.2.3",
-    "swagger-ui-express": "^4.5.0",
-    "youtube-dl-exec": "^2.1.5"
+    "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
-    "@types/ffmpeg": "^1.0.4",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/passport-github": "^1.1.7",
     "@types/swagger-jsdoc": "^6.0.1",
