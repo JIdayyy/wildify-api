@@ -11,6 +11,7 @@ import {
 import minioClient from "../../../services/minioClient";
 import createSoundWaveData from "../../../utils/createSoundWaveData";
 import { io } from "../../..";
+import { Prisma } from "@prisma/client";
 
 const post: SongHandlers["post"] = async (req, res, next) => {
   try {
@@ -59,15 +60,6 @@ const post: SongHandlers["post"] = async (req, res, next) => {
     const fileName = `${slugify(albumartist)}/${slugify(album)}/${slugify(
       title
     )}`;
-
-    const count = await prisma.song.count({
-      where: { title },
-    });
-
-    if (count !== 0) {
-      res.status(400);
-      throw new Error("This song already exists");
-    }
 
     const metadata = {
       "Content-type": type?.mime,
@@ -131,7 +123,10 @@ const post: SongHandlers["post"] = async (req, res, next) => {
 
     return res.status(201).json(newSong);
   } catch (error) {
-    // res.status(error.code === "P2002" ? 400 : res.statusCode || 500);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(error.code === "P2002" ? 400 : res.statusCode || 500);
+      return next(error);
+    }
     return next(error);
   }
 };

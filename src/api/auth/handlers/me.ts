@@ -19,6 +19,8 @@ const me: AuthHandlers["me"] = (req, res, next) => {
       throw new Error("Invalid token");
     }
 
+    res.setHeader("Authorization", `Bearer ${token}`);
+
     return res.status(200).send({ ...user });
   } catch (error) {
     console.log(error);

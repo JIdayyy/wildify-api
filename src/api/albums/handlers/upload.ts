@@ -4,6 +4,7 @@ import { asyncFormParse, slugify } from "../../../utils/songUtils";
 import fileType from "file-type";
 import fs from "fs";
 import prisma from "../../../../prisma/client";
+import sharp from "sharp";
 
 const albumPictureUpload = async (
   req: Request,
@@ -24,9 +25,11 @@ const albumPictureUpload = async (
 
     const { path } = files.file[0];
 
-    const buffer = fs.readFileSync(path);
+    const buffer = sharp(fs.readFileSync(path))
+      .resize(450, 450)
+      .webp({ lossless: true });
 
-    const type = await fileType.fromBuffer(buffer);
+    const type = await fileType.fromBuffer(await buffer.toBuffer());
 
     const metadata = {
       "Content-type": type?.mime,
@@ -41,6 +44,8 @@ const albumPictureUpload = async (
       },
     });
 
+    const pictureName = album.picture?.split("/").pop();
+
     minioClient.putObject(
       "wildify",
       `${slugify(album.artist?.name as string)}/${slugify(album.title)}/${
@@ -48,6 +53,13 @@ const albumPictureUpload = async (
       }`,
       buffer,
       metadata
+    );
+
+    minioClient.removeObject(
+      "wildify",
+      `${slugify(album.artist?.name as string)}/${slugify(
+        album.title
+      )}/${pictureName}`
     );
 
     if (!album) {
