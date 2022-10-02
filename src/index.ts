@@ -13,6 +13,19 @@ export const io = new Server(server, {
   cors: corsOptions,
 });
 
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+  socket.on("NEW_SONG", (data) => {
+    socket.emit("NEW_SONG", data);
+  });
+  socket.on("ALBUM_UPDATE", (data) => {
+    socket.emit("ALBUM_UPDATE", data);
+  });
+});
+
 server.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT} 🌎💥`);
 });
