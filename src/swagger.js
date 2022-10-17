@@ -15,6 +15,15 @@ const doc = {
   schemes: ["http", "https"],
   consumes: ["application/json"],
   produces: ["application/json"],
+  securityDefinitions: {
+    Bearer: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+      description:
+        "Enter your bearer token in the format **Bearer &lt;token>**",
+    },
+  },
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
