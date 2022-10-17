@@ -3,6 +3,7 @@ import AlbumHandlers from "../interfaces";
 
 const getAll: AlbumHandlers["getAll"] = async (req, res, next) => {
   const { query } = req;
+
   try {
     if (!query.count && !query.album) {
       const albums = await prisma.album.findMany();

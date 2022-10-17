@@ -4,6 +4,11 @@ import SongHandlers from "../interfaces";
 
 const getAll: SongHandlers["getAll"] = async (req, res, next) => {
   const { query } = req;
+  const { user } = req;
+
+  if (!user) {
+    throw new Error("User not found");
+  }
 
   try {
     if (query.soundwave) {
@@ -12,6 +17,11 @@ const getAll: SongHandlers["getAll"] = async (req, res, next) => {
           album: true,
           artist: true,
           soundWave: true,
+        },
+        where: {
+          user: {
+            id: user.id,
+          },
         },
       });
       return res.status(200).json(songs);
