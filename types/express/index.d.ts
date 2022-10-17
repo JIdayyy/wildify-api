@@ -1,6 +1,7 @@
+import { UserWithoutPassword } from "../../src/interfaces/user";
+
 declare module "audio-decode";
 declare module "decode-audio-data";
-import { UserWithoutPassword } from "./src/interfaces/user";
 
 export interface TokenPayload extends UserWithoutPassword {}
 
