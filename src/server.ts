@@ -11,14 +11,14 @@ import setCache from "./middlewares/setCache";
 
 const app = Express();
 
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 app.use(cors(corsOptions));
 
 app.use(passport.initialize());
 
 app.use(bodyParser.raw());
 app.use(bodyParser.json());
-
-app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // now call the new middleware function in your app
 
