@@ -3,6 +3,7 @@ import ArtistHandlers from "../interfaces";
 
 const getOne: ArtistHandlers["getOne"] = async (req, res, next) => {
   const { id } = req.params;
+
   try {
     const artist = await prisma.artist.findUnique({
       where: {
