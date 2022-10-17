@@ -5,6 +5,7 @@ import fileType from "file-type";
 import fs from "fs";
 import prisma from "../../../../prisma/client";
 import sharp from "sharp";
+import io from "../../../socket";
 
 const albumPictureUpload = async (
   req: Request,
@@ -77,7 +78,9 @@ const albumPictureUpload = async (
       },
     });
 
-    res.status(200).json(updatedAlbum);
+    io.emit("ALBUM_UPDATE", updatedAlbum);
+
+    return res.status(200).json(updatedAlbum);
   } catch (error) {
     next(error);
   }

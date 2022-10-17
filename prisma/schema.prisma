@@ -12,11 +12,11 @@ model Song {
   title      String     @unique
   link       String
   duration   String     @default("0:00")
-  artist     Artist?    @relation(fields: [artistId], references: [id],onDelete: Cascade)
-  artistId   String?
+  artist     Artist     @relation(fields: [artistId], references: [id],onDelete: Cascade)
+  artistId   String
   playlists  Playlist[]
-  album      Album?     @relation(fields: [albumId], references: [id],onDelete: Cascade)
-  albumId    String?
+  album      Album      @relation(fields: [albumId], references: [id],onDelete: Cascade)
+  albumId    String
   user       User?      @relation(fields: [userId], references: [id],onDelete: Cascade)
   userId     String?
   created_at DateTime   @default(now())
@@ -47,8 +47,8 @@ model Album {
   id       String  @id @default(uuid())
   title    String  @unique
   picture  String?
-  artist   Artist? @relation(fields: [artistId], references: [id],onDelete: Cascade)
-  artistId String?
+  artist   Artist @relation(fields: [artistId], references: [id],onDelete: Cascade)
+  artistId String
   songs    Song[]
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
@@ -73,6 +73,12 @@ model User {
   password String
   songs    Song[]
   playlists Playlist[]
+  role     Role     @default(USER)
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
 }
