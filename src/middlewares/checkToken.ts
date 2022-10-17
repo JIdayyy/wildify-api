@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { Secret } from "jsonwebtoken";
+import { UserWithoutPassword } from "../interfaces/user";
 
 export async function checkToken(
   req: Request,
@@ -14,7 +15,7 @@ export async function checkToken(
     if (bearer === "Bearer" && token) {
       const decoded = jwt.verify(token, process.env.SECRET as string);
       if (typeof decoded !== "string" && decoded.username) {
-        req.user = decoded;
+        req.user = decoded as UserWithoutPassword;
         return next();
       }
       res.status(401).send("Invalid token");

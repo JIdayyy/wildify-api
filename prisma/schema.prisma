@@ -73,6 +73,12 @@ model User {
   password String
   songs    Song[]
   playlists Playlist[]
+  role     Role     @default(USER)
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
 }

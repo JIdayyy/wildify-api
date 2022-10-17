@@ -15,6 +15,12 @@ import { Prisma } from "@prisma/client";
 
 const post: SongHandlers["post"] = async (req, res, next) => {
   try {
+    const { user } = req;
+
+    if (!user) {
+      return next(new Error("User not found"));
+    }
+
     const { files } = await asyncFormParse(req);
 
     if (!files) {
@@ -105,6 +111,11 @@ const post: SongHandlers["post"] = async (req, res, next) => {
             where: {
               name: albumartist,
             },
+          },
+        },
+        user: {
+          connect: {
+            id: user.id as string,
           },
         },
         soundWave: {
