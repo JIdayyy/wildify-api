@@ -15,7 +15,7 @@ const put: AlbumHandlers["put"] = async (req, res, next) => {
       },
     });
 
-    res.status(200).json(album);
+    res.status(204).json(album);
   } catch (error) {
     next(error);
   }
