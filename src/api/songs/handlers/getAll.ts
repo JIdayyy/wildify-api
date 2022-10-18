@@ -17,6 +17,7 @@ const getAll: SongHandlers["getAll"] = async (req, res, next) => {
           album: true,
           artist: true,
           soundWave: true,
+          genre: true,
         },
         where: {
           user: {
@@ -31,6 +32,8 @@ const getAll: SongHandlers["getAll"] = async (req, res, next) => {
       include: {
         album: true,
         artist: true,
+        soundWave: true,
+        genre: true,
       },
     });
 

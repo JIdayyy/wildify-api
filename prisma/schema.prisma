@@ -19,9 +19,19 @@ model Song {
   albumId    String
   user       User?      @relation(fields: [userId], references: [id],onDelete: Cascade)
   userId     String?
+  genre     Genre      @relation(fields: [genreId], references: [id],onDelete: Cascade)
+  genreId   String
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
   soundWave SoundWave? 
+}
+
+model Genre {
+  id         String     @id @default(uuid())
+  name       String     @unique
+  songs      Song[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 }
 
 model SoundWave {

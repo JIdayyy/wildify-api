@@ -15,6 +15,12 @@ const getOne: SongHandlers["getOne"] = async (req, res, next) => {
       where: {
         id,
       },
+      include: {
+        album: true,
+        artist: true,
+        soundWave: true,
+        genre: true,
+      },
     });
 
     res.status(200).json(song);

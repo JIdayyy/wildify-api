@@ -9,11 +9,7 @@ router.get("/", controller.getAll);
 router.get("/:id", controller.getOne);
 router.put("/:id", bodyValidator(albumValidator.put), controller.put);
 router.delete("/:id", controller.delete);
-router.post("/", controller.post);
-router.post(
-  "/:id/picture",
-  bodyValidator(albumValidator.post),
-  controller.pictureUpload
-);
+router.post("/", bodyValidator(albumValidator.post), controller.post);
+router.post("/:id/picture", controller.pictureUpload);
 
 export default router;
