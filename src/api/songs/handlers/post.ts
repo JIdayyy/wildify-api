@@ -10,8 +10,8 @@ import {
 } from "../../../utils/songUtils";
 import minioClient from "../../../services/minioClient";
 import createSoundWaveData from "../../../utils/createSoundWaveData";
-import { io } from "../../..";
 import { Prisma } from "@prisma/client";
+import { io } from "../../../socket";
 
 const post: SongHandlers["post"] = async (req, res, next) => {
   try {

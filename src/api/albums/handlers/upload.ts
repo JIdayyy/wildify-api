@@ -5,7 +5,7 @@ import fileType from "file-type";
 import fs from "fs";
 import prisma from "../../../../prisma/client";
 import sharp from "sharp";
-import io from "../../../socket";
+import { io } from "../../../socket";
 
 const albumPictureUpload = async (
   req: Request,

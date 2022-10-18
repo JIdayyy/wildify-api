@@ -2,16 +2,12 @@ import http from "http";
 import dotenv from "dotenv";
 import app from "./server";
 export const server = http.createServer(app);
-import { Server } from "socket.io";
-import corsOptions from "./config/corsOptions";
+
+import { io } from "./socket";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
-
-export const io = new Server(server, {
-  cors: corsOptions,
-});
 
 io.on("connection", (socket) => {
   console.log("a user connected");

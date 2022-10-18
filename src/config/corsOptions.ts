@@ -8,7 +8,7 @@ export const corsOptions = {
     origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => Error | void
   ): void | Error => {
-    console.log(origin);
+    console.log("origin", origin);
 
     if (process.env.NODE_ENV === "development") {
       return callback(null, true);
