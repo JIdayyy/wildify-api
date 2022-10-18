@@ -35,13 +35,13 @@ const post: SongHandlers["post"] = async (req, res, next) => {
     const { path } = files.file[0];
 
     const {
-      common: { album, albumartist, title },
+      common: { album, albumartist, title, genre },
       format: { duration },
     } = await mm.parseFile(path, {
       duration: true,
     });
 
-    if (!album || !albumartist || !title) {
+    if (!album || !albumartist || !title || !genre) {
       const errorMessage = {
         ...(!album && {
           album: "This audio file doesn't have an album in metadata",
@@ -53,6 +53,9 @@ const post: SongHandlers["post"] = async (req, res, next) => {
         }),
         ...(!title && {
           title: "This audio file doesn't have a title in metadata",
+        }),
+        ...(!genre && {
+          genre: "This audio file doesn't have a genre in metadata",
         }),
       };
 
@@ -113,6 +116,16 @@ const post: SongHandlers["post"] = async (req, res, next) => {
             },
           },
         },
+        genre: {
+          connectOrCreate: {
+            create: {
+              name: genre[0],
+            },
+            where: {
+              name: genre[0],
+            },
+          },
+        },
         user: {
           connect: {
             id: user.id as string,
@@ -126,6 +139,7 @@ const post: SongHandlers["post"] = async (req, res, next) => {
       },
       include: {
         album: true,
+        genre: true,
         artist: true,
       },
     });
