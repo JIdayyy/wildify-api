@@ -3,7 +3,7 @@ import SongHandlers from "../interfaces";
 
 const put: SongHandlers["put"] = async (req, res, next) => {
   const { id } = req.params;
-  const data = req.body;
+  const { albumId, artistId, duration, link, title } = req.body;
 
   try {
     const song = await prisma.song.update({
@@ -11,11 +11,15 @@ const put: SongHandlers["put"] = async (req, res, next) => {
         id,
       },
       data: {
-        ...data,
+        albumId,
+        artistId,
+        duration,
+        link,
+        title,
       },
     });
 
-    res.status(204).json(song);
+    res.status(200).json(song);
   } catch (error) {
     next(error);
   }
