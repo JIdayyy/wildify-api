@@ -2,11 +2,18 @@ import prisma from "../../../../prisma/client";
 import AlbumHandlers from "../interfaces";
 
 const post: AlbumHandlers["post"] = async (req, res, next) => {
-  const { body } = req;
+  const { artistId, picture, title } = req.body;
+
   try {
     const newAlbum = await prisma.album.create({
       data: {
-        ...body,
+        artist: {
+          connect: {
+            id: artistId,
+          },
+        },
+        picture,
+        title,
       },
     });
     return res.status(201).json(newAlbum);

@@ -15,7 +15,7 @@ const put: ArtistHandlers["put"] = async (req, res, next) => {
       },
     });
 
-    res.status(204).json(artist);
+    res.status(200).json(artist);
   } catch (error) {
     next(error);
   }
