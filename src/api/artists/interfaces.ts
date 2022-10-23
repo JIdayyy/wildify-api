@@ -9,4 +9,5 @@ export default interface ArtistHandlers {
   put: RequestHandler<{ id: string }, Artist, Partial<Artist>>;
   delete: RequestHandler<{ id: string }, string, null>;
   post: RequestHandler<Record<string, never>, Artist, ArtistBodyPost>;
+  pictureUpload: RequestHandler<{ id: string }, Artist, null>;
 }

@@ -6,12 +6,11 @@ import fs from "fs";
 import prisma from "../../../../prisma/client";
 import sharp from "sharp";
 import { io } from "../../../socket";
-import AlbumHandlers from "../interfaces";
 
-const albumPictureUpload: AlbumHandlers["pictureUpload"] = async (
-  req,
-  res,
-  next
+const artistPictureUpload = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
 ) => {
   try {
     const { files } = await asyncFormParse(req);
@@ -37,54 +36,50 @@ const albumPictureUpload: AlbumHandlers["pictureUpload"] = async (
       "Content-type": type?.mime,
     };
 
-    const album = await prisma.album.findUniqueOrThrow({
+    const artist = await prisma.artist.findUniqueOrThrow({
       where: {
         id: req.params.id,
       },
       include: {
-        artist: true,
+        albums: true,
       },
     });
 
-    const pictureName = album.picture?.split("/").pop();
+    const pictureName = artist.picture?.split("/").pop();
 
     minioClient.putObject(
       "wildify",
-      `${slugify(album.artist?.name as string)}/${slugify(album.title)}/${
-        files.file[0].originalFilename
-      }`,
+      `${slugify(artist?.name as string)}/${files.file[0].originalFilename}`,
       buffer,
       metadata
     );
 
     minioClient.removeObject(
       "wildify",
-      `${slugify(album.artist?.name as string)}/${slugify(
-        album.title
-      )}/${pictureName}`
+      `${slugify(artist?.name as string)}/${pictureName}`
     );
 
-    if (!album) {
+    if (!artist) {
       throw new Error("Album not found");
     }
 
-    const updatedAlbum = await prisma.album.update({
+    const updatedArtist = await prisma.album.update({
       where: {
         id: req.params.id,
       },
       data: {
         picture: `https://${process.env.MINIO_ENDPOINT}/wildify/${slugify(
-          album.artist?.name as string
-        )}/${slugify(album.title)}/${files.file[0].originalFilename}`,
+          artist?.name as string
+        )}/${files.file[0].originalFilename}`,
       },
     });
 
-    io.emit("ALBUM_UPDATE", updatedAlbum);
+    io.emit("ALBUM_UPDATE", updatedArtist);
 
-    return res.status(200).json(updatedAlbum);
+    return res.status(200).json(updatedArtist);
   } catch (error) {
     next(error);
   }
 };
 
-export default albumPictureUpload;
+export default artistPictureUpload;

@@ -9,4 +9,5 @@ export default interface AlbumHandlers {
   put: RequestHandler<{ id: string }, Album, Partial<Album>>;
   delete: RequestHandler<{ id: string }, { message: string; id: string }, null>;
   post: RequestHandler<Record<string, never>, Album, AlbumBodyPost>;
+  pictureUpload: RequestHandler<{ id: string }, Album, null>;
 }

@@ -10,5 +10,10 @@ router.get("/:id", controller.getOne);
 router.put("/:id", bodyValidator(artistValidator.put), controller.put);
 router.delete("/:id", controller.delete);
 router.post("/", bodyValidator(artistValidator.post), controller.post);
+router.post(
+  "/:id/picture",
+  bodyValidator(artistValidator.post),
+  controller.pictureUpload
+);
 
 export default router;
