@@ -529,10 +529,16 @@
         }
       }
     },
-    "/playlists/addsong": {
+    "/playlists/{id}/addsong": {
       "post": {
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "authorization",
             "in": "header",
