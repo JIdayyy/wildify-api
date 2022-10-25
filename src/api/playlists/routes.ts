@@ -11,7 +11,7 @@ router.put("/:id", bodyValidator(playlistValidator.put), controller.put);
 router.delete("/:id", controller.delete);
 router.post("/", bodyValidator(playlistValidator.post), controller.post);
 router.post(
-  "/addsong",
+  "/:id/addsong",
   bodyValidator(playlistValidator.addSongs),
   controller.addSongs
 );
