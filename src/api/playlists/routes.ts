@@ -15,5 +15,6 @@ router.post(
   bodyValidator(playlistValidator.addSongs),
   controller.addSongs
 );
+router.post("/:id/upload", controller.uploadPicture);
 
 export default router;
