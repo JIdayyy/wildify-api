@@ -552,7 +552,7 @@
         }
       }
     },
-    "/playlists/{id}/upload": {
+    "/playlists/{id}/picture": {
       "post": {
         "description": "",
         "parameters": [
