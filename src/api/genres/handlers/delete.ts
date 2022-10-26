@@ -10,7 +10,9 @@ const deleteOne: GenreHandlers["delete"] = async (req, res, next) => {
       },
     });
 
-    return res.status(200).json({ message: "Genre deleted", id });
+    return res
+      .status(200)
+      .json({ message: `Genre with id: ${id} deleted successfully` });
   } catch (error) {
     next(error);
   }

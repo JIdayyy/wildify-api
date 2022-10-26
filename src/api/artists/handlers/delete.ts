@@ -10,7 +10,9 @@ const deleteOne: ArtistHandlers["delete"] = async (req, res, next) => {
       },
     });
 
-    res.status(200).json(`Artist with id: ${id} deleted successfully`);
+    res
+      .status(200)
+      .json({ message: `Artist with id: ${id} deleted successfully` });
   } catch (error) {
     next(error);
   }

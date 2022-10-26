@@ -10,7 +10,9 @@ const deleteOne: PlaylistHandlers["delete"] = async (req, res, next) => {
       },
     });
 
-    res.status(200).json(`Playlist with id: ${id} deleted successfully`);
+    res
+      .status(200)
+      .json({ message: `Playlist with id: ${id} deleted successfully` });
   } catch (error) {
     next(error);
   }
