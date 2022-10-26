@@ -10,7 +10,7 @@ const deleteOne: AlbumHandlers["delete"] = async (req, res, next) => {
       },
     });
 
-    return res.status(200).json({ message: "Album deleted", id });
+    return res.status(200).json({ message: `Album with id: ${id} deleted` });
   } catch (error) {
     next(error);
   }
