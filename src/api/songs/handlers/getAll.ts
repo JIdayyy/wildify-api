@@ -10,6 +10,19 @@ const getAll: SongHandlers["getAll"] = async (req, res, next) => {
     throw new Error("User not found");
   }
 
+  if (user.role === "ADMIN") {
+    console.log("admin");
+    const songs = await prisma.song.findMany({
+      include: {
+        album: true,
+        artist: true,
+        soundWave: true,
+        genre: true,
+      },
+    });
+    return res.status(200).json(songs);
+  }
+
   try {
     if (query.soundwave) {
       const songs = await prisma.song.findMany({
@@ -23,18 +36,6 @@ const getAll: SongHandlers["getAll"] = async (req, res, next) => {
           user: {
             id: user.id,
           },
-        },
-      });
-      return res.status(200).json(songs);
-    }
-
-    if (user.role === "ADMIN") {
-      const songs = await prisma.song.findMany({
-        include: {
-          album: true,
-          artist: true,
-          soundWave: true,
-          genre: true,
         },
       });
       return res.status(200).json(songs);
