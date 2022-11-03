@@ -68,7 +68,7 @@ model Playlist {
   id          String @id @default(uuid())
   title       String @unique
   description String
-  picture     String
+  picture     String?
   songs       Song[]
   user        User  @relation(fields: [userId], references: [id],onDelete: Cascade)
   userId      String
