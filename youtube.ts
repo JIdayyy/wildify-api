@@ -56,6 +56,8 @@ async function main(
 ) {
   const info = await getInfo(url);
 
+  console.log("keep");
+
   fs.writeFileSync("videoInfo.json", JSON.stringify(info));
 
   const title = info.title.replace(/[^\w\s]/gi, "").replace(/ /g, "-");

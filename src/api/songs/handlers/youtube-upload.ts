@@ -3,7 +3,6 @@ import minioClient from "../../../services/minioClient";
 import SongHandlers from "../interfaces";
 import fileType from "file-type";
 import * as mm from "music-metadata";
-import { io } from "../../..";
 import fs from "fs";
 import { mp3DurationString, slugify } from "../../../utils/songUtils";
 import prisma from "../../../../prisma/client";
@@ -121,8 +120,6 @@ const youtube: SongHandlers["youtubeDownload"] = async (req, res, next) => {
     console.log(newSong);
 
     // fs.unlinkSync(audio);
-
-    io.emit("NEW_SONG", newSong);
 
     res.status(201).json(newSong);
   } catch (error) {
