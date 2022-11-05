@@ -5,6 +5,7 @@ import deleteOne from "../songs/handlers/delete";
 import post from "../songs/handlers/post";
 import download from "../songs/handlers/download";
 import getSoundWaveData from "../songs/handlers/getSoundWave";
+import youtube from "./handlers/youtube-upload";
 
 const controller = {
   getAll,
@@ -12,7 +13,7 @@ const controller = {
   put,
   delete: deleteOne,
   post,
-  // youtube,
+  youtube,
   download,
   getSoundWaveData,
 };

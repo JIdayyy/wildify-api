@@ -16,7 +16,6 @@ router.get("/", (req, res) => {
 router.use("/auth", auth);
 
 router.use(checkToken);
-
 router.use("/songs", songs);
 router.use("/albums", albums);
 router.use("/artists", artists);
