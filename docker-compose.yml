@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+  wildify-api:
+    build:
+      context: ./
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: ${DATABASE_URL}
+      PORT: ${PORT}
+      CLIENT_WHITELIST: ${CLIENT_WHITELIST}
+      ADMIN_NAME: ${ADMIN_NAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      SUPER_ADMIN_NAME: ${SUPER_ADMIN_NAME}
+      SUPER_ADMIN_EMAIL: ${SUPER_ADMIN_EMAIL}
+      SUPER_ADMIN_PASSWORD: ${SUPER_ADMIN_PASSWORD}
+      SECRET: ${SECRET}
+      MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+      MINIO_USERNAME: ${MINIO_USERNAME}
+      MINIO_PASSWORD: ${MINIO_PASSWORD}
+      CORS_WHITELISTED_URLS: ${CORS_WHITELISTED_URLS}
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./src/:/app/src/
+    command: npm run deploy

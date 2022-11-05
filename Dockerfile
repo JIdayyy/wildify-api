@@ -1,5 +1,5 @@
 # pull the Node.js Docker image
-FROM node:alpine
+FROM node:14.17.6-alpine
 
 # create the directory inside the container
 
@@ -9,7 +9,12 @@ WORKDIR /usr/src/
 COPY package*.json .
 
 # run npm install in our local machine
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
 RUN npm install
+
 
 
 # copy the generated modules and all other files to the container
