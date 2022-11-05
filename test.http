@@ -1,0 +1,11 @@
+POST http://localhost:4000/api/v1/songs/youtube
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3ZTA5OWU3LWZmYmUtNGY0Zi04MGZiLWVhZThiNThkZTUxZiIsInVzZXJuYW1lIjoid2lsZGVycyIsImVtYWlsIjoid2lsZGVyc0BnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImNyZWF0ZWRfYXQiOiIyMDIyLTEwLTE4VDE0OjIzOjEyLjc2NFoiLCJ1cGRhdGVkX2F0IjoiMjAyMi0xMC0xOFQxNDoyMjo0Ni43MjdaIiwiaWF0IjoxNjY3NTUyNjIxfQ.ulVCgyI09rXMHxccgMxnGNZgBcWaY149qY9QOLNVfPo
+
+{
+    "url": "https://youtu.be/NcXsK_u4ixI",
+    "songTitle": "I can't go home without you",
+    "artistName": "Kaleo",
+    "albumName": "Live",
+    "genre": "Rock"
+}

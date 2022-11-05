@@ -48,12 +48,17 @@
     "socket.io": "^4.5.2",
     "swagger-autogen": "^2.21.5",
     "swagger-jsdoc": "^6.2.3",
-    "swagger-ui-express": "^4.5.0"
+    "swagger-ui-express": "^4.5.0",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "ffmpeg-static": "^5.1.0",
+    "youtube-dl-exec": "^2.1.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/passport-github": "^1.1.7",
+    "@types/ffmpeg": "^1.0.4",
     "@types/sharp": "^0.31.0",
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",
