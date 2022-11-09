@@ -4,7 +4,7 @@ import PlaylistHandlers from "../interfaces";
 const getOne: PlaylistHandlers["getOne"] = async (req, res, next) => {
   const { id } = req.params;
   const { songs } = req.query;
-  console.log(songs);
+
   try {
     const playlist = await prisma.playlist.findUnique({
       where: {
