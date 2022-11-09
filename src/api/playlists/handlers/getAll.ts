@@ -6,7 +6,17 @@ const getAll: PlaylistHandlers["getAll"] = async (req, res, next) => {
   try {
     const playlists = await prisma.playlist.findMany({
       include: {
-        songs: songs === "true" ? true : false,
+        songs:
+          songs === "true"
+            ? {
+                include: {
+                  album: true,
+                  artist: true,
+                  soundWave: true,
+                  genre: true,
+                },
+              }
+            : false,
       },
     });
 
