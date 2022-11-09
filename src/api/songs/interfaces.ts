@@ -7,6 +7,7 @@ export interface YoutubeUploadBody {
   songTitle: string;
   artistName: string;
   albumName: string;
+  genre: string;
 }
 
 export interface SongDeleteResponse {
