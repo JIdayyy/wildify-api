@@ -11,7 +11,17 @@ const getOne: PlaylistHandlers["getOne"] = async (req, res, next) => {
         id,
       },
       include: {
-        songs: songs === "true" ? true : false,
+        songs:
+          songs === "true"
+            ? {
+                include: {
+                  album: true,
+                  artist: true,
+                  soundWave: true,
+                  genre: true,
+                },
+              }
+            : false,
       },
     });
 
