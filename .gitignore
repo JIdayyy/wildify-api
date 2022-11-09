@@ -8,3 +8,4 @@ dist
 *.wav
 *.webm
 package-lock.json
+*.http
