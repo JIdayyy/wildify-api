@@ -16,6 +16,7 @@ const getOne: AlbumHandlers["getOne"] = async (req, res, next) => {
             include: {
               artist: true,
               album: true,
+              soundWave: true,
             },
           },
           artist: true,

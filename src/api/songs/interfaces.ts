@@ -10,11 +10,6 @@ export interface YoutubeUploadBody {
   genre: string;
 }
 
-export interface SongDeleteResponse {
-  message: string;
-  id: Song["id"];
-}
-
 export default interface SongHandlers extends IHandlers<Song> {
   getSoundWaveData: RequestHandler<Record<string, never>, number[], null>;
   youtubeDownload: RequestHandler<

@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-dotenv.config();
 import SongHandlers from "../interfaces";
 import prisma from "../../../../prisma/client";
 

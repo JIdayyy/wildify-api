@@ -8,5 +8,4 @@ export default interface IHandlers<T> {
   put: RequestHandler<{ id: string }, T, Body<T>>;
   delete: RequestHandler<{ id: string }, { message: string }, null>;
   post: RequestHandler<Record<string, never>, T, Body<T>>;
-  addSongs: RequestHandler<{ id: string }, T, { songIds: string[] }>;
 }

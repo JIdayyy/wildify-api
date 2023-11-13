@@ -1,9 +1,13 @@
 import http from "http";
 import dotenv from "dotenv";
 import app from "./server";
+
 export const server = http.createServer(app);
 
 import { io } from "./socket";
+import { EnvironmentService, config } from "./environment";
+
+export const env = new EnvironmentService(config);
 
 dotenv.config();
 

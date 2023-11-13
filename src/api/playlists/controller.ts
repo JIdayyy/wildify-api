@@ -5,6 +5,7 @@ import deleteOne from "./handlers/delete";
 import post from "./handlers/post";
 import addSongs from "./handlers/addSongs";
 import playlistPictureUpload from "./handlers/upload";
+import removeSongs from "./handlers/removeSongs";
 
 const controller = {
   getAll,
@@ -14,6 +15,7 @@ const controller = {
   post,
   addSongs,
   uploadPicture: playlistPictureUpload,
+  removeSongs: removeSongs,
 };
 
 export default controller;

@@ -14,6 +14,9 @@ const playlistValidator = {
   addSongs: Joi.object().keys({
     songIds: Joi.array().items(Joi.string()).required(),
   }),
+  removeSongs: Joi.object().keys({
+    songIds: Joi.array().items(Joi.string()).required(),
+  }),
 };
 
 export default playlistValidator;

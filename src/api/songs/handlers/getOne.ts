@@ -23,7 +23,7 @@ const getOne: SongHandlers["getOne"] = async (req, res, next) => {
       },
     });
 
-    res.status(200).json(song);
+    return res.status(200).json(song);
   } catch (error) {
     next(error);
   }

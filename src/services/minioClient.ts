@@ -5,11 +5,11 @@ dotenv.config();
 const { MINIO_USERNAME, MINIO_PASSWORD, MINIO_ENDPOINT } = process.env;
 
 const minioClient = new Minio.Client({
-  endPoint: MINIO_ENDPOINT || "minio-dc-s3.digitalcopilote.re",
-  port: 80,
+  endPoint: MINIO_ENDPOINT || "localhost",
+  port: 9000,
   useSSL: false,
-  accessKey: MINIO_USERNAME || "minio_acces_key",
-  secretKey: MINIO_PASSWORD || "minio_secret_key",
+  accessKey: MINIO_USERNAME || "ROOTNAME",
+  secretKey: MINIO_PASSWORD || "CHANGEME123",
 });
 
 export default minioClient;

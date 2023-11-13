@@ -24,7 +24,7 @@ const youtube: SongHandlers["youtubeDownload"] = async (req, res, next) => {
 
         ...(!artistName && {
           albumartist:
-            "This audio file doesn't have an albumartist in metadata",
+            "This audio file doesn't have an album artist in metadata",
         }),
         ...(!songTitle && {
           title: "This audio file doesn't have a title in metadata",
@@ -64,20 +64,6 @@ const youtube: SongHandlers["youtubeDownload"] = async (req, res, next) => {
     if (!soundWaveData) {
       throw new Error("Error during waveform data creation");
     }
-
-    // const {
-    //   format: { duration },
-    // } = await mm.parseFile(audio, {
-    //   duration: true,
-    // });
-
-    // console.log("duration", duration);
-
-    // const durationInSeconds = await mp3DurationString(duration);
-
-    console.log("i will record the song in the db");
-
-    // TODO HANDLE SONG DURATION
 
     const newSong = await prisma.song.create({
       data: {
@@ -136,13 +122,8 @@ const youtube: SongHandlers["youtubeDownload"] = async (req, res, next) => {
       },
     });
 
-    console.log(newSong);
-
-    // fs.unlinkSync(audio);
-
-    res.status(201).json(newSong);
+    return res.status(201).json(newSong);
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

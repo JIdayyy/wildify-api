@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 
 const login: AuthHandlers["login"] = async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, email.toLowerCase());
   try {
     const user = await prisma.user.findUniqueOrThrow({
       where: {

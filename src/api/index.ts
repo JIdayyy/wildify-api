@@ -4,6 +4,7 @@ import albums from "../api/albums/routes";
 import artists from "../api/artists/routes";
 import playlist from "../api/playlists/routes";
 import genres from "../api/genres/routes";
+import search from "../api/search/routes";
 import auth from "./auth/routes";
 import { checkToken } from "../middlewares/checkToken";
 
@@ -21,5 +22,6 @@ router.use("/albums", albums);
 router.use("/artists", artists);
 router.use("/playlists", playlist);
 router.use("/genres", genres);
+router.use("/search", search);
 
 export default router;

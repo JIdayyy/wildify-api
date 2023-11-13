@@ -21,53 +21,34 @@ const post: SongHandlers["post"] = async (req, res, next) => {
       return next(new Error("User not found"));
     }
 
-    const { files } = await asyncFormParse(req);
+    const {
+      files,
+      fields: { title, album, artist, genre },
+    } = await asyncFormParse(req);
 
     if (!files) {
       throw new Error("No files provided");
     }
 
-    if (files.file.length > 1) {
+    if (files.files.length > 1) {
       res.status(400);
       throw new Error("Please send only 1 file");
     }
 
-    const { path } = files.file[0];
+    const { path } = files.files[0];
 
     const {
-      common: { album, albumartist, title, genre },
       format: { duration },
     } = await mm.parseFile(path, {
       duration: true,
     });
 
-    if (!album || !albumartist || !title || !genre) {
-      const errorMessage = {
-        ...(!album && {
-          album: "This audio file doesn't have an album in metadata",
-        }),
-
-        ...(!albumartist && {
-          albumartist:
-            "This audio file doesn't have an albumartist in metadata",
-        }),
-        ...(!title && {
-          title: "This audio file doesn't have a title in metadata",
-        }),
-        ...(!genre && {
-          genre: "This audio file doesn't have a genre in metadata",
-        }),
-      };
-
-      throw new Error(JSON.stringify(errorMessage));
-    }
-
     const buffer = fs.readFileSync(path);
     const durationInSeconds = await mp3DurationString(duration);
     const type = await fileType.fromBuffer(buffer);
 
-    const fileName = `${slugify(albumartist)}/${slugify(album)}/${slugify(
-      title
+    const fileName = `${slugify(artist[0])}/${slugify(album[0])}/${slugify(
+      title[0]
     )}`;
 
     const metadata = {
@@ -84,35 +65,38 @@ const post: SongHandlers["post"] = async (req, res, next) => {
       throw new Error("Error during waveform data creation");
     }
 
-    console.log("SoundWave Created");
+    console.log("Waveform Created");
 
     const newSong = await prisma.song.create({
       data: {
-        title,
+        title: title[0],
         duration: durationInSeconds,
-        link: `https://${process.env.MINIO_ENDPOINT}/wildify/${fileName}`,
+        link:
+          process.env.NODE_ENV === "development"
+            ? `https://${process.env.MINIO_ENDPOINT}:${process.env.MINIO_PORT}/wildify/${fileName}`
+            : `http://${process.env.MINIO_ENDPOINT}:${process.env.MINIO_PORT}/wildify/${fileName}`,
         album: {
           connectOrCreate: {
             create: {
-              title: album,
+              title: album[0],
               artist: {
                 connect: {
-                  name: albumartist,
+                  name: artist[0],
                 },
               },
             },
             where: {
-              title: album,
+              title: album[0],
             },
           },
         },
         artist: {
           connectOrCreate: {
             create: {
-              name: albumartist,
+              name: artist[0],
             },
             where: {
-              name: albumartist,
+              name: artist[0],
             },
           },
         },
@@ -150,9 +134,9 @@ const post: SongHandlers["post"] = async (req, res, next) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       res.status(error.code === "P2002" ? 400 : res.statusCode || 500);
-      return next(error);
+      next(error);
     }
-    return next(error);
+    next(error);
   }
 };
 

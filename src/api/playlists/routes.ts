@@ -16,5 +16,10 @@ router.post(
   controller.addSongs
 );
 router.post("/:id/picture", controller.uploadPicture);
+router.delete(
+  "/:id/removesong",
+  bodyValidator(playlistValidator.removeSongs),
+  controller.removeSongs
+);
 
 export default router;

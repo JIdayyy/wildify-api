@@ -1,4 +1,3 @@
-import { Song } from "@prisma/client";
 import prisma from "../../../../prisma/client";
 import SongHandlers from "../interfaces";
 

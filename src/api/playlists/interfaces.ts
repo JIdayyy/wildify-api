@@ -4,4 +4,5 @@ import IHandlers from "../../../types/express/handlers";
 
 export default interface PlaylistHandlers extends IHandlers<Playlist> {
   addSongs: RequestHandler<{ id: string }, Playlist, { songIds: string[] }>;
+  removeSongs: RequestHandler<{ id: string }, Playlist, { songIds: string[] }>;
 }

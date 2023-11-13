@@ -12,6 +12,12 @@ const getAll: AlbumHandlers["getAll"] = async (req, res, next) => {
 
     const albums = await prisma.album.findMany({
       include: {
+        songs: {
+          include: {
+            soundWave: true,
+            artist: true,
+          },
+        },
         artist: true,
         _count: {
           select: {
